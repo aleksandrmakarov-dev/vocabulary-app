@@ -9,38 +9,49 @@ interface FolderListProps extends React.HTMLAttributes<HTMLDivElement> {
   isLoading?: boolean;
   isError?: boolean;
   error?: GenericErrorResponse;
+  renderSkeleton: (key: number | string) => React.ReactNode;
+  skeletonCount: number;
 }
 
 export function FolderList(props: FolderListProps) {
-  const { folders, render, error, isError, isLoading, className, ...other } =
-    props;
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError || !folders) {
-    return (
-      <Alert severity="error">
-        <AlertTitle>Failed to load folders</AlertTitle>
-        {error?.message}
-      </Alert>
-    );
-  }
-
-  if (folders.length === 0) {
-    return <div>No folders found</div>;
-  }
+  const {
+    folders,
+    render,
+    error,
+    isError,
+    isLoading,
+    className,
+    renderSkeleton,
+    skeletonCount,
+    ...other
+  } = props;
 
   return (
-    <div
-      className={cn(
-        "flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3",
-        className
+    <>
+      {isError ? (
+        <Alert severity="error">
+          <AlertTitle>Failed to load folders</AlertTitle>
+          {error?.message}
+        </Alert>
+      ) : (
+        <div
+          className={cn(
+            "flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3",
+            className
+          )}
+          {...other}
+        >
+          {isLoading ? (
+            Array(skeletonCount)
+              .fill(1)
+              .map((_, i) => renderSkeleton(i))
+          ) : folders && folders.length > 0 ? (
+            folders.map(render)
+          ) : (
+            <p>No folders found</p>
+          )}
+        </div>
       )}
-      {...other}
-    >
-      {folders.map((folder) => render(folder))}
-    </div>
+    </>
   );
 }

@@ -1,5 +1,9 @@
 "use client";
-import { FolderCard, useFolders } from "@/components/entities/folder";
+import {
+  FolderCard,
+  FolderCardSkeleton,
+  useFolders,
+} from "@/components/entities/folder";
 import { FolderList } from "@/components/entities/folder";
 import RouterPagination from "@/components/shared/router-pagination/RouterPagination";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -24,6 +28,8 @@ export function MainFolderList() {
             setsCount={folder.setIDs.length}
           />
         )}
+        renderSkeleton={(key) => <FolderCardSkeleton key={key} />}
+        skeletonCount={6}
         isLoading={isLoading}
         isError={isError}
         error={error?.response?.data}

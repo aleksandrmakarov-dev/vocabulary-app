@@ -34,7 +34,7 @@ export default function RouterPagination(props: RouterPaginationProps) {
       )}
       {...other}
     >
-      <span className="text-gray-700 dark:text-gray-400 hidden sm:block">
+      <span className="text-gray-700 hidden sm:block">
         Showing <span className="font-semibold text-gray-900 ">{from}</span> to{" "}
         <span className="font-semibold text-gray-900 ">{to}</span> of{" "}
         <span className="font-semibold text-gray-900 ">{itemsCount}</span>{" "}
