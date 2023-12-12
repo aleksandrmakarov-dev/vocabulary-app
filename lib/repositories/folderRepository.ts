@@ -6,7 +6,7 @@ import {
   CreateFolderDto,
   GetFolderListDto,
   UpdateFolderDto,
-} from "../dto/folderDTO";
+} from "../dto/folderDto";
 
 // Get Folder List
 

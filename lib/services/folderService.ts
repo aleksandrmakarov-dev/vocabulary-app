@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetFolderListDto } from "../dto/folderDTO";
+import { GetFolderListDto } from "../dto/folderDto";
 import { PagedResponse } from "../api";
 import { Folder } from "@prisma/client";
 
