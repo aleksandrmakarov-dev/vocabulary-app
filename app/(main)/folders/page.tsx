@@ -1,9 +1,11 @@
-import { NavigationFolderList } from "@/components/widgets/folder";
+import PageHeader from "@/components/shared/page-header/PageHeader";
+import { MainFolderList } from "@/components/widgets/folder";
 
 export default function Folders() {
   return (
     <>
-      <NavigationFolderList />
+      <PageHeader title="Folders" />
+      <MainFolderList />
     </>
   );
 }

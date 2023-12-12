@@ -1,1 +1,1 @@
-export { NavigationFolderList } from "./navigation-folder-list/NavigationFolderList";
+export { MainFolderList } from "./main-folder-list/MainFolderList";

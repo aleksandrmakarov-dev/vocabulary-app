@@ -7,7 +7,10 @@ import folderRepository from "@/lib/repositories/folderRepository";
 import { NextRequest } from "next/server";
 
 export const GET = withErrorHandler(async (req: NextRequest) => {
-  const searchParams = GetFolderListDtoSchema.parse(req.nextUrl.searchParams);
+  const searchParams = GetFolderListDtoSchema.parse({
+    page: req.nextUrl.searchParams.get("page"),
+    limit: req.nextUrl.searchParams.get("limit"),
+  });
 
   const foundFolders = await folderRepository.getList(searchParams);
 

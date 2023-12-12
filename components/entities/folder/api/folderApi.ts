@@ -5,8 +5,8 @@ import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 type QueryParams = {
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number;
 };
 
 export const folderKeys = {

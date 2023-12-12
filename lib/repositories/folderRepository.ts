@@ -13,7 +13,7 @@ import {
 async function getList(
   params: GetFolderListDto
 ): Promise<PagedResponse<Folder>> {
-  const { page = 1, limit } = params;
+  const { page, limit } = params;
   const count = await prisma.folder.count();
   const skip = (page - 1) * (limit ?? count);
   const take = limit ?? count;

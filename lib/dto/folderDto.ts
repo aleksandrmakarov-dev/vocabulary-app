@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const GetFolderListDtoSchema = z.object({
-  page: z.number().optional(),
-  limit: z.number().optional(),
+  page: z.coerce.number().min(1),
+  limit: z.coerce.number().optional(),
 });
 
 export type GetFolderListDto = z.infer<typeof GetFolderListDtoSchema>;

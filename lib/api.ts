@@ -35,9 +35,14 @@ function errorHandler(error: unknown) {
   return InternalServerError("Internal Server Error");
 }
 
+export function logger(req: NextRequest) {
+  console.log(`${req.method} - ${req.url}`);
+}
+
 export function withErrorHandler(handler: any) {
   return async function (req: NextRequest, ctx: any) {
     try {
+      logger(req);
       return await handler(req, ctx);
     } catch (error) {
       return errorHandler(error);

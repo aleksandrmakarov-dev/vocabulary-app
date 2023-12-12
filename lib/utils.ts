@@ -1,4 +1,6 @@
+import clsx, { ClassValue } from "clsx";
 import moment from "moment";
+import { twMerge } from "tailwind-merge";
 
 export const formatDate = (value: Date | number | string) => {
   const date = moment(value);
@@ -9,3 +11,7 @@ export const formatDate = (value: Date | number | string) => {
     return date.fromNow();
   }
 };
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
