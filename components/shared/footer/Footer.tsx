@@ -45,14 +45,22 @@ export default function Footer() {
       <div className="flex items-center gap-x-4 text-gray-600">
         <span>© 2023 aleksandrmakarov.com</span>
         {NavLinks.map((link) => (
-          <Link className="underline hover:text-black" href={link.route}>
+          <Link
+            key={link.name}
+            className="underline hover:text-black"
+            href={link.route}
+          >
             {link.name}
           </Link>
         ))}
       </div>
       <div className="flex items-center gap-x-4 text-gray-600">
         {IconNavLinks.map((link) => (
-          <Link className="underline hover:text-black" href={link.route}>
+          <Link
+            key={link.name}
+            className="underline hover:text-black"
+            href={link.route}
+          >
             {link.icon}
           </Link>
         ))}
