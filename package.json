@@ -12,7 +12,9 @@
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@hookform/resolvers": "^3.3.2",
     "@mui/icons-material": "latest",
+    "@mui/lab": "^5.0.0-alpha.156",
     "@mui/material": "latest",
     "@prisma/client": "^5.7.0",
     "@tanstack/react-query": "^5.13.4",
@@ -22,6 +24,7 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.49.2",
     "tailwind-merge": "^2.1.0",
     "zod": "^3.22.4"
   },

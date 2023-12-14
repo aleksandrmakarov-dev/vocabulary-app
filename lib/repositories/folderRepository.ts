@@ -1,12 +1,7 @@
 import { Folder } from "@prisma/client";
 import { PagedResponse } from "../api";
 import prisma from "../prisma";
-import { z } from "zod";
-import {
-  CreateFolderDto,
-  GetFolderListDto,
-  UpdateFolderDto,
-} from "../dto/folderDto";
+import { EditFolderDto, GetFolderListDto } from "../dto/folderDto";
 
 // Get Folder List
 
@@ -21,6 +16,9 @@ async function getList(
   const foundFolders = await prisma.folder.findMany({
     skip: skip,
     take: take,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return {
@@ -36,7 +34,7 @@ async function getList(
 
 // Create Folder
 
-async function create(body: CreateFolderDto): Promise<Folder> {
+async function create(body: EditFolderDto): Promise<Folder> {
   const createdFolder = await prisma.folder.create({
     data: {
       name: body.name,
@@ -48,7 +46,7 @@ async function create(body: CreateFolderDto): Promise<Folder> {
 
 // Update Folder
 
-async function updateById(id: string, body: UpdateFolderDto): Promise<Folder> {
+async function updateById(id: string, body: EditFolderDto): Promise<Folder> {
   const updatedFolder = await prisma.folder.update({
     where: {
       id: id,

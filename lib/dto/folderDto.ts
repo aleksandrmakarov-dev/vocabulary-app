@@ -7,14 +7,12 @@ export const GetFolderListDtoSchema = z.object({
 
 export type GetFolderListDto = z.infer<typeof GetFolderListDtoSchema>;
 
-export const CreateFolderDtoSchema = z.object({
-  name: z.string(),
+export const EditFolderDtoSchema = z.object({
+  name: z.string().min(1).max(255),
 });
 
-export type CreateFolderDto = z.infer<typeof CreateFolderDtoSchema>;
+export type EditFolderDto = z.infer<typeof EditFolderDtoSchema>;
 
 export const UpdateFolderDtoSchema = z.object({
   name: z.string(),
 });
-
-export type UpdateFolderDto = z.infer<typeof UpdateFolderDtoSchema>;

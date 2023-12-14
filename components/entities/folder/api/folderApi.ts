@@ -46,3 +46,22 @@ export const useFolders = (
     ...options,
   });
 };
+
+type UseFolderByIdQuery = UseQueryOptions<
+  Folder,
+  AxiosError<GenericErrorResponse>,
+  Folder,
+  unknown[]
+>;
+
+type UseFolderByIdOptions = Omit<UseFolderByIdQuery, "queryFn" | "queryKey">;
+
+export const useFolderById = (id: string, options?: UseFolderByIdOptions) => {
+  return useQuery({
+    queryKey: folderKeys.folder.id(id),
+    queryFn: async () => {
+      return await folderService.getById(id);
+    },
+    ...options,
+  });
+};

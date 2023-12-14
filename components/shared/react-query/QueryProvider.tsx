@@ -6,6 +6,9 @@ export default function QueryProvider(props: { children: React.ReactNode }) {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: false,
+        retry: false,
+        refetchOnReconnect: false,
+        refetchOnMount: false,
       },
     },
   });

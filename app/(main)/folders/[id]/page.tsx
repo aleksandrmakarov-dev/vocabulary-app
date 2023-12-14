@@ -1,3 +1,5 @@
+import { CurrentFolderPageHeader } from "@/components/widgets/folder";
+
 interface FolderPageContext {
   params: {
     id: string;
@@ -6,8 +8,8 @@ interface FolderPageContext {
 
 export default function Folder(ctx: FolderPageContext) {
   return (
-    <div>
-      <h1>Folder - {ctx.params.id}</h1>
-    </div>
+    <>
+      <CurrentFolderPageHeader id={ctx.params.id} />
+    </>
   );
 }

@@ -75,7 +75,8 @@ export function Forbidden(message: string) {
 }
 
 export function NoContent() {
-  return NextResponse.json({}, { status: 204 });
+  // Next js api throws an error if we return 204 code
+  return NextResponse.json(null, { status: 200 });
 }
 
 export function InternalServerError(message: string) {
