@@ -5,18 +5,18 @@ import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 type QueryParams = {
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: number;
 };
 
 export const folderKeys = {
   folders: {
     root: ["folders"],
-    query: (query: QueryParams) => ["folders", query],
+    query: (query: QueryParams) => [...folderKeys.folders.root, query],
   },
   folder: {
     root: ["folder"],
-    id: (id: string) => ["folder", id],
+    id: (id: string) => [...folderKeys.folder.root, id],
   },
   mutations: {
     create: () => [...folderKeys.folder.root, "create"],

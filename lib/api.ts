@@ -6,6 +6,7 @@ import {
   NotImplementedError,
   UnauthorizedError,
 } from "./errors";
+import { ZodError } from "zod";
 
 function errorHandler(error: unknown) {
   if (error instanceof NotFoundError) {
@@ -26,6 +27,12 @@ function errorHandler(error: unknown) {
 
   if (error instanceof ForbiddenError) {
     return Forbidden(error.message);
+  }
+
+  if (error instanceof ZodError) {
+    return ValidationErrorResponse(
+      error.errors.map((e) => e.message).join(". ")
+    );
   }
 
   if (error instanceof Error) {
@@ -58,33 +65,43 @@ export function Created(data: any) {
   return NextResponse.json(data, { status: 201 });
 }
 
+function ErrorResponseBase(title: string, message: string, status: number) {
+  return NextResponse.json(
+    { title: title, message: message },
+    { status: status }
+  );
+}
+
 export function NotFound(message: string) {
-  return NextResponse.json({ message: message }, { status: 404 });
+  return ErrorResponseBase("Not Found", message, 404);
 }
 
 export function BadRequest(message: string) {
-  return NextResponse.json({ message: message }, { status: 400 });
+  return ErrorResponseBase("Bad Request", message, 400);
 }
 
 export function Unauthorized(message: string) {
-  return NextResponse.json({ message: message }, { status: 401 });
+  return ErrorResponseBase("Unauthorized", message, 401);
 }
 
 export function Forbidden(message: string) {
-  return NextResponse.json({ message: message }, { status: 403 });
+  return ErrorResponseBase("Forbidden", message, 403);
 }
 
 export function NoContent() {
-  // Next js api throws an error if we return 204 code
-  return NextResponse.json(null, { status: 200 });
+  return NextResponse.json({}, { status: 200 });
 }
 
 export function InternalServerError(message: string) {
-  return NextResponse.json({ message: message }, { status: 500 });
+  return ErrorResponseBase("Internal Server Error", message, 500);
+}
+
+export function ValidationErrorResponse(message: string) {
+  return ErrorResponseBase("Validation Error", message, 422);
 }
 
 export function NotImplemented(message: string) {
-  return NextResponse.json({ message: message }, { status: 501 });
+  return ErrorResponseBase("Not Implemented", message, 501);
 }
 
 export function getSearchParams<T>(req: NextRequest) {
@@ -94,7 +111,7 @@ export function getSearchParams<T>(req: NextRequest) {
 
 interface Meta {
   page: number;
-  limit: number;
+  limit?: number;
   itemsCount: number;
   pagesCount: number;
 }

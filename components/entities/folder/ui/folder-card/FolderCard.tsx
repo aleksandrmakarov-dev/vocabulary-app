@@ -6,7 +6,6 @@ import {
   CardContent,
   CardHeader,
 } from "@mui/material";
-import moment from "moment";
 import Routing from "@/lib/routing";
 import { formatDate } from "@/lib/utils";
 

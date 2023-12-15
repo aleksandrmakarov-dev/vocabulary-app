@@ -8,14 +8,13 @@ import { EditFolderDto, GetFolderListDto } from "../dto/folderDto";
 async function getList(
   params: GetFolderListDto
 ): Promise<PagedResponse<Folder>> {
-  const { page, limit } = params;
+  const { page = 1, limit } = params;
   const count = await prisma.folder.count();
-  const skip = (page - 1) * (limit ?? count);
-  const take = limit ?? count;
+  const skip = (page - 1) * (limit ?? 0);
 
   const foundFolders = await prisma.folder.findMany({
     skip: skip,
-    take: take,
+    ...(limit && { take: limit }),
     orderBy: {
       createdAt: "desc",
     },
@@ -25,7 +24,7 @@ async function getList(
     data: foundFolders,
     meta: {
       page: page,
-      limit: limit ?? count,
+      limit: limit,
       itemsCount: count,
       pagesCount: Math.ceil(count / (limit ?? count)),
     },
@@ -53,6 +52,7 @@ async function updateById(id: string, body: EditFolderDto): Promise<Folder> {
     },
     data: {
       name: body.name,
+      updatedAt: new Date(),
     },
   });
 

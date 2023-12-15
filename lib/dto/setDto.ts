@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const GetFolderListDtoSchema = z.object({
+export const GetSetListDtoSchema = z.object({
   page: z
     .number({
       coerce: true,
@@ -17,12 +17,16 @@ export const GetFolderListDtoSchema = z.object({
       return val;
     })
     .optional(),
+  folderId: z.string().optional(),
 });
 
-export type GetFolderListDto = z.infer<typeof GetFolderListDtoSchema>;
+export type GetSetListDto = z.infer<typeof GetSetListDtoSchema>;
 
-export const EditFolderDtoSchema = z.object({
+export const EditSetDtoSchema = z.object({
   name: z.string().min(1).max(255),
+  description: z.string().min(1).max(255),
+  image: z.string().optional(),
+  folderId: z.string().min(1).max(255),
 });
 
-export type EditFolderDto = z.infer<typeof EditFolderDtoSchema>;
+export type EditSetDto = z.infer<typeof EditSetDtoSchema>;

@@ -6,15 +6,21 @@ import {
 } from "@/components/entities/folder";
 import { FolderList } from "@/components/entities/folder";
 import RouterPagination from "@/components/shared/router-pagination/RouterPagination";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-export function MainFolderList() {
-  const searchParams = useSearchParams();
+interface MainFolderListProps {
+  page: number;
+  limit: number;
+}
+
+export function MainFolderList(props: MainFolderListProps) {
+  const { page, limit } = props;
+
   const pathname = usePathname();
 
   const { data, isLoading, isError, isSuccess, error } = useFolders({
-    page: Number(searchParams.get("page") ?? 1),
-    limit: Number(searchParams.get("limit") ?? 6),
+    page: page,
+    limit: limit,
   });
 
   return (
@@ -34,12 +40,15 @@ export function MainFolderList() {
         isError={isError}
         error={error?.response?.data}
       />
-      {isSuccess && data && data.meta.pagesCount > 0 && (
+      {isSuccess && data && data.meta.pagesCount > 0 && data.meta.limit && (
         <RouterPagination
           className="mt-5"
           baseUrl={pathname}
           label="Folders"
-          {...data.meta}
+          page={data.meta.page}
+          pagesCount={data.meta.pagesCount}
+          limit={data.meta.limit}
+          itemsCount={data.meta.itemsCount}
         />
       )}
     </>
