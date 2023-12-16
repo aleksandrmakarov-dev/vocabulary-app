@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 import { Control } from "react-hook-form";
 
 interface FolderFormFieldsProps {
-  control: Control<EditFolderDto, any>;
+  control: Control<EditFolderDto>;
   isLoading?: boolean;
 }
 

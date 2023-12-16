@@ -16,7 +16,7 @@ interface FolderEditDialogProps {
   isLoading?: boolean;
   isError?: boolean;
   error?: GenericErrorResponse;
-  submit: (values: any, close: () => void) => void;
+  submit: (values: EditFolderDto, close: () => void) => void;
 }
 
 export function FolderEditorDialog(props: FolderEditDialogProps) {
@@ -44,7 +44,7 @@ export function FolderEditorDialog(props: FolderEditDialogProps) {
   return (
     <FormDialog
       title={title}
-      primaryButtonLabel={edit ? "Update" : "Create"}
+      primaryButtonLabel={edit ? "Save changes" : "Create"}
       isLoading={isLoading}
       trigger={React.cloneElement(trigger, { onClick: () => setOpen(true) })}
       open={open}

@@ -5,6 +5,8 @@ import { Alert, AlertTitle, Button } from "@mui/material";
 import { CurrentFolderDeleteDialog, CurrentFolderEditorDialog } from "..";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Routing from "@/lib/routing";
+import AddIcon from "@mui/icons-material/Add";
 
 interface CurrentFolderPageHeaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,7 +31,7 @@ export function CurrentFolderPageHeader(props: CurrentFolderPageHeaderProps) {
           isLoading={isLoading}
           {...other}
           actions={
-            <div className="space-x-3">
+            <>
               <CurrentFolderEditorDialog
                 id={id}
                 trigger={
@@ -56,7 +58,15 @@ export function CurrentFolderPageHeader(props: CurrentFolderPageHeaderProps) {
                   </Button>
                 }
               />
-            </div>
+              <Button
+                startIcon={<AddIcon />}
+                href={Routing.sets.new(id)}
+                variant="contained"
+                disableElevation
+              >
+                New set
+              </Button>
+            </>
           }
         />
       )}

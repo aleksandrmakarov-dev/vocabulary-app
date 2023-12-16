@@ -1,9 +1,9 @@
+import PageHeader from "@/components/shared/page-header/PageHeader";
+
 export default function Home() {
   return (
-    <main>
-      <div>
-        <h1>Hello!</h1>
-      </div>
-    </main>
+    <div>
+      <PageHeader title="Home" />
+    </div>
   );
 }

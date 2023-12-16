@@ -22,8 +22,8 @@ export function FolderCard(props: FolderCardProps) {
   return (
     <Card variant="outlined">
       <CardHeader title={name} subheader={formatDate(createdAt)} />
-      <CardContent className="bg-gray-200">
-        <div className="flex items-center justify-center py-5">
+      <CardContent className="bg-gray-200 h-44 w-full">
+        <div className="w-full h-full flex items-center justify-center p-5">
           <FolderRounded className="text-gray-400" sx={{ fontSize: 72 }} />
         </div>
       </CardContent>
@@ -36,7 +36,6 @@ export function FolderCard(props: FolderCardProps) {
         >
           Open
         </Button>
-        <span />
         <p>{setsCount} Set(s)</p>
       </CardActions>
     </Card>

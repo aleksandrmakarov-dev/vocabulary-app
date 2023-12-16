@@ -7,8 +7,11 @@ import {
   UnauthorizedError,
 } from "./errors";
 import { ZodError } from "zod";
+import { Prisma } from "@prisma/client";
 
 function errorHandler(error: unknown) {
+  console.log(error);
+
   if (error instanceof NotFoundError) {
     return NotFound(error.message);
   }
@@ -33,6 +36,10 @@ function errorHandler(error: unknown) {
     return ValidationErrorResponse(
       error.errors.map((e) => e.message).join(". ")
     );
+  }
+
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    return InternalServerError(error.message);
   }
 
   if (error instanceof Error) {

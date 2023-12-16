@@ -38,7 +38,7 @@ export const MainSetList = (props: MainSetListProps) => {
         <RouterPagination
           className="mt-5"
           baseUrl={pathname}
-          label="Folders"
+          label="Sets"
           page={data.meta.page}
           pagesCount={data.meta.pagesCount}
           limit={data.meta.limit}

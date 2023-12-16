@@ -23,7 +23,9 @@ export default function PageHeader(props: PageHeaderProps) {
       ) : (
         <>
           <h1 className="text-3xl font-semibold">{title}</h1>
-          {actions}
+          <div className="flex flex-col gap-y-1 gap-x-3 w-full sm:w-auto mt-5 sm:mt-0 sm:flex-row">
+            {actions}
+          </div>
         </>
       )}
     </div>

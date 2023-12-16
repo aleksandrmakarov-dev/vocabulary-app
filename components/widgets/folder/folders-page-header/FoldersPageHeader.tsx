@@ -2,6 +2,7 @@
 import PageHeader from "@/components/shared/page-header/PageHeader";
 import { Button } from "@mui/material";
 import { NewFolderEditorDialog } from "..";
+import AddIcon from "@mui/icons-material/Add";
 
 export function FoldersPageHeader() {
   return (
@@ -10,8 +11,12 @@ export function FoldersPageHeader() {
       actions={
         <NewFolderEditorDialog
           trigger={
-            <Button variant="contained" disableElevation>
-              Create
+            <Button
+              startIcon={<AddIcon />}
+              variant="contained"
+              disableElevation
+            >
+              New Folder
             </Button>
           }
         />

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetSetListDto } from "../dto/setDto";
+import { EditSetDto, GetSetListDto } from "../dto/setDto";
 import { PagedResponse } from "../api";
 import { Set } from "@prisma/client";
 
@@ -11,7 +11,8 @@ async function getByFolderId(
   params: Omit<GetSetListDto, "folderId">
 ): Promise<PagedResponse<Set>> {
   const response = await axios.get<PagedResponse<Set>>(
-    `${foldersUrl}/${folderId}/sets`
+    `${foldersUrl}/${folderId}/sets`,
+    { params }
   );
   return response.data;
 }
@@ -23,4 +24,19 @@ async function getList(
   return response.data;
 }
 
-export default { getList, getByFolderId };
+async function create(data: EditSetDto): Promise<Set> {
+  const response = await axios.post<Set>(baseUrl, data);
+  return response.data;
+}
+
+async function updateById(id: string, data: EditSetDto): Promise<null> {
+  const response = await axios.put<null>(`${baseUrl}/${id}`, data);
+  return response.data;
+}
+
+async function getById(id: string): Promise<Set> {
+  const response = await axios.get<Set>(`${baseUrl}/${id}`);
+  return response.data;
+}
+
+export default { getList, getByFolderId, create, updateById, getById };

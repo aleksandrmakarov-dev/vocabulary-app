@@ -25,7 +25,7 @@ export type GetSetListDto = z.infer<typeof GetSetListDtoSchema>;
 export const EditSetDtoSchema = z.object({
   name: z.string().min(1).max(255),
   description: z.string().min(1).max(255),
-  image: z.string().optional(),
+  image: z.string().nullable(),
   folderId: z.string().min(1).max(255),
 });
 

@@ -11,7 +11,7 @@ export const useCreatePost = () => {
     Folder,
     AxiosError<GenericErrorResponse>,
     EditFolderDto,
-    unknown
+    unknown[]
   >({
     mutationKey: folderKeys.mutations.create(),
     mutationFn: async (data) => {

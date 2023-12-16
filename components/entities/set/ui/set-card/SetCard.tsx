@@ -8,6 +8,9 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import Image from "next/image";
+import ArticleIcon from "@mui/icons-material/Article";
+import Routing from "@/lib/routing";
 
 interface SetCardProps {
   id: string;
@@ -24,23 +27,24 @@ export function SetCard(props: SetCardProps) {
   return (
     <Card variant="outlined">
       <CardHeader title={name} subheader={formatDate(createdAt)} />
-      <CardMedia
-        component={image ? "img" : "div"}
-        height={194}
-        image={image ?? undefined}
-      >
-        {!image && <p>Hello!</p>}
-      </CardMedia>
+      <div className="w-full h-44 relative bg-gray-200">
+        {image ? (
+          <Image src={image} alt={name} className="object-cover" fill />
+        ) : (
+          <div className="h-full w-full flex items-center justify-center p-5">
+            <ArticleIcon className="text-gray-400" sx={{ fontSize: 72 }} />
+          </div>
+        )}
+      </div>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button variant="contained" disableElevation>
+      <CardActions className="flex items-center justify-between">
+        <Button href={Routing.sets.id(id)} variant="contained" disableElevation>
           Open
         </Button>
-        <div />
         <p>{termsCount} Term(s)</p>
       </CardActions>
     </Card>

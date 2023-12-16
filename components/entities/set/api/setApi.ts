@@ -75,3 +75,22 @@ export const useSetsByFolderId = (
     ...options,
   });
 };
+
+type UseSetByIdQuery = UseQueryOptions<
+  Set,
+  AxiosError<GenericErrorResponse>,
+  Set,
+  unknown[]
+>;
+
+type UseSetByIdOptions = Omit<UseSetByIdQuery, "queryFn" | "queryKey">;
+
+export const useSetById = (id: string, options?: UseSetByIdOptions) => {
+  return useQuery({
+    queryKey: setKeys.set.id(id),
+    queryFn: async () => {
+      return await setService.getById(id);
+    },
+    ...options,
+  });
+};

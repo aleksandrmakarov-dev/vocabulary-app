@@ -1,6 +1,5 @@
-import { NotFound, PagedResponse } from "../api";
+import { PagedResponse } from "../api";
 import { EditSetDto, GetSetListDto } from "../dto/setDto";
-import { NotFoundError } from "../errors";
 import prisma from "../prisma";
 import { Set } from "@prisma/client";
 
@@ -60,4 +59,12 @@ async function create(body: EditSetDto): Promise<Set> {
   return createdSet;
 }
 
-export default { getListByFolderId, create };
+async function getById(id: string): Promise<Set | null> {
+  return await prisma.set.findUnique({
+    where: {
+      id: id,
+    },
+  });
+}
+
+export default { getListByFolderId, create, getById };
