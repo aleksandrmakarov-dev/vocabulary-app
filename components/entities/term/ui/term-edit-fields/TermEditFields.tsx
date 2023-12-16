@@ -39,7 +39,7 @@ export function TermEditFields(props: TermEditFieldsProps) {
         render={({ field }) => (
           <div className="border-2 rounded-md border-gray-200 h-full p-3 flex flex-col items-center justify-center border-dashed">
             <ImageIcon />
-            <span className="text-sm">Image</span>
+            <span className="text-sm text-gray-900">Image</span>
           </div>
         )}
       />
