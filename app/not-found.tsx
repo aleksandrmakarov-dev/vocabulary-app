@@ -9,7 +9,7 @@ export default function NotFound() {
       <div className="text-center">
         <h1 className="text-4xl font-semibold mb-1">Not found – 404!</h1>
         <p className="mb-5 text-lg">
-          The page you're looking for doesn't exist
+          The page you are looking for does not exist
         </p>
         <Button href={Routing.root} variant="contained" disableElevation>
           Back to home
