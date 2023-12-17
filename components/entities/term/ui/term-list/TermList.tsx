@@ -42,7 +42,7 @@ export function TermList(props: TermListProps) {
           ) : terms && terms.length > 0 ? (
             terms.map(render)
           ) : (
-            <p>No folders found</p>
+            <p className="text-center">No terms found</p>
           )}
         </div>
       )}

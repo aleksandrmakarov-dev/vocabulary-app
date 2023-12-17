@@ -33,7 +33,7 @@ async function getList(
 
 // Create Folder
 
-async function create(body: EditFolderDto): Promise<Folder> {
+async function create(body: EditFolderDto): Promise<Folder | null> {
   const createdFolder = await prisma.folder.create({
     data: {
       name: body.name,
@@ -45,7 +45,10 @@ async function create(body: EditFolderDto): Promise<Folder> {
 
 // Update Folder
 
-async function updateById(id: string, body: EditFolderDto): Promise<Folder> {
+async function updateById(
+  id: string,
+  body: EditFolderDto
+): Promise<Folder | null> {
   const updatedFolder = await prisma.folder.update({
     where: {
       id: id,
@@ -73,7 +76,7 @@ async function getById(id: string): Promise<Folder | null> {
 
 // Delete Folder By Id
 
-export async function deleteById(id: string): Promise<Folder> {
+export async function deleteById(id: string): Promise<Folder | null> {
   const deletedFolder = await prisma.folder.delete({
     where: {
       id: id,
@@ -82,4 +85,5 @@ export async function deleteById(id: string): Promise<Folder> {
 
   return deletedFolder;
 }
+
 export default { getList, create, updateById, getById, deleteById };

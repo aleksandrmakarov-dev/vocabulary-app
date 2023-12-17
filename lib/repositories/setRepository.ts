@@ -33,7 +33,7 @@ async function getListByFolderId(
   };
 }
 
-async function create(body: EditSetDto): Promise<Set> {
+async function create(body: EditSetDto): Promise<Set | null> {
   const { name, description, image, folderId } = body;
 
   const createdSet = await prisma.set.create({
@@ -71,4 +71,51 @@ async function getById(id: string): Promise<SetWithTerms | null> {
   });
 }
 
-export default { getListByFolderId, create, getById };
+async function updateById(id: string, data: EditSetDto): Promise<Set | null> {
+  const updatedSet = await prisma.set.update({
+    where: {
+      id: id,
+    },
+    data: {
+      name: data.name,
+      description: data.description,
+      image: data.image,
+      updatedAt: new Date(),
+    },
+  });
+
+  return updatedSet;
+}
+
+async function deleteById(id: string): Promise<Set | null> {
+  const deleteSet = await prisma.set.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  if (deleteSet) {
+    const foundFolder = await prisma.folder.findUnique({
+      where: {
+        id: deleteSet.folderId,
+      },
+    });
+
+    if (foundFolder) {
+      await prisma.folder.update({
+        where: {
+          id: deleteSet.folderId,
+        },
+        data: {
+          setIDs: {
+            set: foundFolder.setIDs.filter((set) => set !== deleteSet.id),
+          },
+        },
+      });
+    }
+  }
+
+  return deleteSet;
+}
+
+export default { getListByFolderId, create, getById, updateById, deleteById };

@@ -46,7 +46,7 @@ export function CurrentSetEditor(props: CurrentSetEditorProps) {
         isError={isError || isDataError}
         error={error?.response?.data || dataError?.response?.data}
       />
-      <PageSubheader className="mt-5" title="Terms" />
+      <PageSubheader className="pt-5" title="Terms" />
       <TermList
         terms={data?.terms}
         render={(term, index) => (

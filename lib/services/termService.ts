@@ -14,7 +14,13 @@ async function updateById(id: string, data: EditTermDto): Promise<null> {
   return response.data;
 }
 
+async function deleteById(id: string): Promise<null> {
+  const response = await axios.delete<null>(`${baseUrl}/${id}`);
+  return response.data;
+}
+
 export default {
   create,
   updateById,
+  deleteById,
 };

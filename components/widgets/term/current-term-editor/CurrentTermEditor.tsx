@@ -16,6 +16,7 @@ import { useUpdateTermById } from "@/components/features/term/update/api/updateA
 import { useQueryClient } from "@tanstack/react-query";
 import { setKeys } from "@/components/entities/set";
 import { SetWithTerms } from "@/lib/prisma";
+import { CurrentTermDeleteDialog } from "..";
 
 interface CurrentTermEditorProps {
   index: number;
@@ -87,9 +88,15 @@ export function CurrentTermEditor(props: CurrentTermEditorProps) {
               <IconButton size="small" onClick={onEdit}>
                 <EditIcon />
               </IconButton>
-              <IconButton size="small">
-                <DeleteIcon />
-              </IconButton>
+              <CurrentTermDeleteDialog
+                id={term.id}
+                setId={term.setId}
+                trigger={
+                  <IconButton size="small">
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              />
             </div>
           )}
         </>

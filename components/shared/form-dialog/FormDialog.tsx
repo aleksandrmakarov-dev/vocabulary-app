@@ -52,7 +52,7 @@ export default function FormDialog(props: FormDialogProps) {
       <Dialog open={open} fullWidth>
         <form
           onSubmit={(e) => {
-            e.preventDefault();
+            e.stopPropagation();
             handleSubmit(e);
           }}
         >

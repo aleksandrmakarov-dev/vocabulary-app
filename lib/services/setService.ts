@@ -40,4 +40,16 @@ async function getById(id: string): Promise<SetWithTerms> {
   return response.data;
 }
 
-export default { getList, getByFolderId, create, updateById, getById };
+async function deleteById(id: string): Promise<null> {
+  const response = await axios.delete<null>(`${baseUrl}/${id}`);
+  return response.data;
+}
+
+export default {
+  getList,
+  getByFolderId,
+  create,
+  updateById,
+  getById,
+  deleteById,
+};

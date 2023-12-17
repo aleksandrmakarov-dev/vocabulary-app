@@ -48,7 +48,7 @@ export function FolderList(props: FolderListProps) {
           ) : folders && folders.length > 0 ? (
             folders.map(render)
           ) : (
-            <p>No folders found</p>
+            <p className="text-center col-span-3">No folders found</p>
           )}
         </div>
       )}

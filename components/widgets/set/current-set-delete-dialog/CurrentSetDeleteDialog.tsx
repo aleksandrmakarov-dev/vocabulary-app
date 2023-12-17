@@ -1,32 +1,33 @@
 "use client";
-import { useDeleteFolderById } from "@/components/features/folder";
+import { useDeleteSetById } from "@/components/features/set";
 import FormDialog from "@/components/shared/form-dialog/FormDialog";
 import Routing from "@/lib/routing";
 import { Alert, AlertTitle } from "@mui/material";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { FormEvent, useState } from "react";
 
-interface CurrentFolderDeleteDialogProps {
-  id: string;
+interface CurrentSetDeleteDialogProps {
   trigger: JSX.Element;
+  id: string;
 }
 
-export function CurrentFolderDeleteDialog(
-  props: CurrentFolderDeleteDialogProps
-) {
-  const { id, trigger } = props;
-  const [open, setOpen] = React.useState<boolean>(false);
+export function CurrentSetDeleteDialog(props: CurrentSetDeleteDialogProps) {
+  const { trigger, id } = props;
+
+  const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
+  const { mutate, isPending, isError, error } = useDeleteSetById();
 
-  const { mutate, isPending, isError, error } = useDeleteFolderById();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     mutate(id, {
       onSuccess: () => {
         close();
         router.push(Routing.folders.index);
+      },
+      onError: (error) => {
+        console.log(error);
       },
     });
   };
@@ -43,12 +44,12 @@ export function CurrentFolderDeleteDialog(
       primaryButtonColor="error"
       secondaryButtonColor="error"
       isLoading={isPending}
-      primaryButtonLabel="Yes, delete folder"
-      secondaryButtonLabel="No, keep folder"
+      primaryButtonLabel="Yes, delete set"
+      secondaryButtonLabel="No, keep set"
     >
       <Alert severity="warning">
-        <AlertTitle>Are you sure you want to delete this folder?</AlertTitle>
-        This action cannot be undone.
+        <AlertTitle>Are you sure you want to delete this set?</AlertTitle>
+        All terms it includes will be deleted. This action cannot be undone.
       </Alert>
     </FormDialog>
   );

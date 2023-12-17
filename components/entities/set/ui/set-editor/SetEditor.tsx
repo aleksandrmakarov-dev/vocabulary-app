@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { Alert, Button } from "@mui/material";
 import LoadingButton from "@/components/shared/loading-button/LoadingButton";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CurrentSetDeleteDialog } from "@/components/widgets/set";
 
 interface SetEditorProps {
   edit?: boolean;
@@ -38,15 +39,20 @@ export function SetEditor(props: SetEditorProps) {
       <form onSubmit={handleSubmit(submit)}>
         <SetEditFields control={control} />
         <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-x-3 gap-y-3 justify-end mt-3">
-          {edit && (
-            <Button
-              disabled={isLoading}
-              variant="contained"
-              color="error"
-              disableElevation
-            >
-              Delete
-            </Button>
+          {edit && set && (
+            <CurrentSetDeleteDialog
+              id={set.id}
+              trigger={
+                <Button
+                  disabled={isLoading}
+                  variant="contained"
+                  color="error"
+                  disableElevation
+                >
+                  Delete
+                </Button>
+              }
+            />
           )}
           <LoadingButton
             loading={isLoading}

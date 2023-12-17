@@ -27,7 +27,7 @@ model Set {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime?
   folderId    String    @db.ObjectId
-  folder      Folder    @relation(fields: [folderId], references: [id])
+  folder      Folder    @relation(fields: [folderId], references: [id], onDelete: Cascade)
   termIDs     String[]  @db.ObjectId
   terms       Term[]
 }
@@ -40,5 +40,5 @@ model Term {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime?
   setId      String    @db.ObjectId
-  set        Set       @relation(fields: [setId], references: [id])
+  set        Set       @relation(fields: [setId], references: [id], onDelete: Cascade)
 }

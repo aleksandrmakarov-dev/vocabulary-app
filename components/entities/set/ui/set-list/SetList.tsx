@@ -48,7 +48,7 @@ export function SetList(props: SetListProps) {
           ) : sets && sets.length > 0 ? (
             sets.map(render)
           ) : (
-            <p>No folders found</p>
+            <p className="text-center col-span-3">No folders found</p>
           )}
         </div>
       )}
