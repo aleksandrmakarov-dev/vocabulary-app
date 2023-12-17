@@ -37,7 +37,7 @@ export function SetEditor(props: SetEditorProps) {
       {isError && <Alert severity="error">{error?.message}</Alert>}
       <form onSubmit={handleSubmit(submit)}>
         <SetEditFields control={control} />
-        <div className="flex items-center gap-x-3 justify-end mt-3">
+        <div className="flex flex-col-reverse sm:flex-row sm:items-center gap-x-3 gap-y-3 justify-end mt-3">
           {edit && (
             <Button
               disabled={isLoading}

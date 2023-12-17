@@ -42,7 +42,7 @@ export function TermEditor(props: TermEditorProps) {
       <div className="flex flex-col sm:grid sm:grid-cols-[1fr_1fr_8rem] gap-x-3 gap-y-1">
         <TermEditFields control={control} />
       </div>
-      <div className="flex flex-col-reverse mt-5 gap-x-3 gap-y-1 sm:flex-row sm:justify-end">
+      <div className="flex flex-col-reverse mt-5 gap-x-3 gap-y-3 sm:flex-row sm:justify-end">
         {edit && (
           <Button disabled={isLoading} onClick={() => cancel?.(reset)}>
             Cancel
