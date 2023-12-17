@@ -19,6 +19,9 @@ export function NewSetEditor(props: NewSetEditorProps) {
       onSuccess: (created) => {
         router.push(Routing.sets.edit(created.id));
       },
+      onError: () => {
+        console.log("error");
+      },
     });
   };
 

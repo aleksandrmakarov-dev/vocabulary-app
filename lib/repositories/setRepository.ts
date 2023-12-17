@@ -1,6 +1,6 @@
 import { PagedResponse } from "../api";
 import { EditSetDto, GetSetListDto } from "../dto/setDto";
-import prisma from "../prisma";
+import prisma, { SetWithTerms } from "../prisma";
 import { Set } from "@prisma/client";
 
 async function getListByFolderId(
@@ -53,16 +53,20 @@ async function create(body: EditSetDto): Promise<Set> {
       setIDs: {
         push: createdSet.id,
       },
+      updatedAt: new Date(),
     },
   });
 
   return createdSet;
 }
 
-async function getById(id: string): Promise<Set | null> {
+async function getById(id: string): Promise<SetWithTerms | null> {
   return await prisma.set.findUnique({
     where: {
       id: id,
+    },
+    include: {
+      terms: true,
     },
   });
 }

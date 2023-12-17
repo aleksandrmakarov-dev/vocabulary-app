@@ -46,7 +46,7 @@ export default function Navbar() {
             Vocabulary App
           </span>
         </Link>
-        <div>
+        <div className="hidden sm:block">
           <ul className="flex items-center gap-x-4">
             {NavLinks.map((link) => {
               const isCurrentPath = pathname === link.route;

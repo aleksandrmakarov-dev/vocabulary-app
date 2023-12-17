@@ -2,6 +2,7 @@ import axios from "axios";
 import { EditSetDto, GetSetListDto } from "../dto/setDto";
 import { PagedResponse } from "../api";
 import { Set } from "@prisma/client";
+import { SetWithTerms } from "../prisma";
 
 const baseUrl = "/api/sets";
 const foldersUrl = "/api/folders";
@@ -34,8 +35,8 @@ async function updateById(id: string, data: EditSetDto): Promise<null> {
   return response.data;
 }
 
-async function getById(id: string): Promise<Set> {
-  const response = await axios.get<Set>(`${baseUrl}/${id}`);
+async function getById(id: string): Promise<SetWithTerms> {
+  const response = await axios.get<SetWithTerms>(`${baseUrl}/${id}`);
   return response.data;
 }
 

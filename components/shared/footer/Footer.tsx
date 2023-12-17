@@ -41,8 +41,8 @@ const IconNavLinks: IconNavLink[] = [
 
 export default function Footer() {
   return (
-    <div className="border-t border-gray-200 p-4 bg-white flex items-center justify-between">
-      <div className="flex items-center gap-x-4 text-gray-600">
+    <div className="border-t border-gray-200 p-4 bg-white flex flex-col sm:flex-row items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-center gap-x-4 text-gray-600">
         <span>© 2023 aleksandrmakarov.com</span>
         {NavLinks.map((link) => (
           <Link
@@ -54,7 +54,7 @@ export default function Footer() {
           </Link>
         ))}
       </div>
-      <div className="flex items-center gap-x-4 text-gray-600">
+      <div className="flex mt-5 sm:mt-0 items-center gap-x-4 text-gray-600">
         {IconNavLinks.map((link) => (
           <Link
             key={link.name}

@@ -62,6 +62,7 @@ export default function FormDialog(props: FormDialogProps) {
             <Button
               color={primaryButtonColor ?? "primary"}
               onClick={handleCancel}
+              disabled={isLoading}
             >
               {secondaryButtonLabel ?? "Cancel"}
             </Button>

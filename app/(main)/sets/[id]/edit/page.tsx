@@ -1,6 +1,5 @@
 import PageHeader from "@/components/shared/page-header/PageHeader";
 import { CurrentSetEditor } from "@/components/widgets/set";
-import { NewTermEditor } from "@/components/widgets/term";
 
 interface SetEditPageContext {
   params: {

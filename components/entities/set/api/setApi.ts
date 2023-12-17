@@ -3,6 +3,7 @@ import { Set } from "@prisma/client";
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import setService from "@/lib/services/setService";
+import { SetWithTerms } from "@/lib/prisma";
 
 type QueryParams = {
   page: number;
@@ -13,6 +14,11 @@ export const setKeys = {
   sets: {
     root: ["sets"],
     query: (query: QueryParams) => [...setKeys.sets.root, query],
+    byFolderId: (folderId: string, query: QueryParams) => [
+      ...setKeys.sets.root,
+      folderId,
+      query,
+    ],
   },
   set: {
     root: ["set"],
@@ -65,7 +71,7 @@ export const useSetsByFolderId = (
   options?: UseSetsByFolderIdOptions
 ) => {
   return useQuery({
-    queryKey: setKeys.sets.query(params),
+    queryKey: setKeys.sets.byFolderId(params.folderId, params),
     queryFn: async () => {
       return await setService.getByFolderId(params.folderId, {
         page: params.page,
@@ -77,9 +83,9 @@ export const useSetsByFolderId = (
 };
 
 type UseSetByIdQuery = UseQueryOptions<
-  Set,
+  SetWithTerms,
   AxiosError<GenericErrorResponse>,
-  Set,
+  SetWithTerms,
   unknown[]
 >;
 

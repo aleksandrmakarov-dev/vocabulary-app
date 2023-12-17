@@ -1,5 +1,6 @@
-import { withErrorHandler, Ok, NotFound } from "@/lib/api";
+import { withErrorHandler, Created } from "@/lib/api";
 import { EditSetDtoSchema } from "@/lib/dto/setDto";
+import { NotFoundError } from "@/lib/errors";
 import folderRepository from "@/lib/repositories/folderRepository";
 import setRepository from "@/lib/repositories/setRepository";
 import { NextRequest } from "next/server";
@@ -10,10 +11,10 @@ export const POST = withErrorHandler(async (req: NextRequest) => {
   const foundFolder = await folderRepository.getById(body.folderId);
 
   if (!foundFolder) {
-    return NotFound(`Folder with id ${body.folderId} not found`);
+    throw new NotFoundError(`Folder with id ${body.folderId} not found`);
   }
 
   const createdSet = await setRepository.create(body);
 
-  return Ok(createdSet);
+  return Created(createdSet);
 });

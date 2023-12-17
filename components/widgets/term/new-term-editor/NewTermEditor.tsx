@@ -1,39 +1,56 @@
 "use client";
-import { TermEditor } from "@/components/entities/term";
+import { TermCard, TermEditor } from "@/components/entities/term";
 import { EditTermDto } from "@/lib/dto/termDto";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  IconButton,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { useCreateTerm } from "@/components/features/term";
+import { setKeys } from "@/components/entities/set";
+import { useQueryClient } from "@tanstack/react-query";
+import { SetWithTerms } from "@/lib/prisma";
 
 interface NewTermEditorProps {
-  index?: number;
   setId?: string;
 }
 
 export function NewTermEditor(props: NewTermEditorProps) {
-  const { setId, index } = props;
+  const { setId } = props;
 
-  const onSubmit = (values: EditTermDto) => {};
+  const queryClient = useQueryClient();
+  const { mutate, isPending, isError, error } = useCreateTerm();
+
+  const onSubmit = (values: EditTermDto, reset: () => void) => {
+    mutate(values, {
+      onSuccess: (createdTerm) => {
+        console.log("success");
+        reset();
+
+        const queryKey = setKeys.set.id(setId!);
+        queryClient.cancelQueries({ queryKey: queryKey });
+
+        queryClient.setQueryData<SetWithTerms>(queryKey, (prev) => {
+          if (prev) {
+            return {
+              ...prev,
+              terms: [...prev.terms, createdTerm],
+            };
+          }
+
+          return prev;
+        });
+      },
+      onError: () => {
+        console.log("error");
+      },
+    });
+  };
 
   return (
-    <Card variant="outlined">
-      <CardHeader
-        title={index ?? "New term"}
-        action={
-          <IconButton size="small">
-            <DeleteIcon />
-          </IconButton>
-        }
+    <TermCard title="New term">
+      <TermEditor
+        setId={setId}
+        submit={onSubmit}
+        isLoading={isPending}
+        isError={isError}
+        error={error?.response?.data}
       />
-      <Divider />
-      <CardContent>
-        <TermEditor setId={setId} submit={onSubmit} />
-      </CardContent>
-    </Card>
+    </TermCard>
   );
 }

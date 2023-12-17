@@ -1,11 +1,12 @@
 "use client";
 import { Set } from "@prisma/client";
 import { SetEditFields } from "../set-edit-fields/SetEditFields";
-import { EditSetDto } from "@/lib/dto/setDto";
+import { EditSetDto, EditSetDtoSchema } from "@/lib/dto/setDto";
 import { GenericErrorResponse } from "@/lib/api";
 import { useForm } from "react-hook-form";
 import { Alert, Button } from "@mui/material";
 import LoadingButton from "@/components/shared/loading-button/LoadingButton";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface SetEditorProps {
   edit?: boolean;
@@ -21,6 +22,7 @@ export function SetEditor(props: SetEditorProps) {
   const { set, edit, folderId, isLoading, isError, error, submit } = props;
 
   const { handleSubmit, control } = useForm<EditSetDto>({
+    resolver: zodResolver(EditSetDtoSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -37,11 +39,21 @@ export function SetEditor(props: SetEditorProps) {
         <SetEditFields control={control} />
         <div className="flex items-center gap-x-3 justify-end mt-3">
           {edit && (
-            <Button variant="contained" color="error" disableElevation>
+            <Button
+              disabled={isLoading}
+              variant="contained"
+              color="error"
+              disableElevation
+            >
               Delete
             </Button>
           )}
-          <LoadingButton type="submit" variant="contained" disableElevation>
+          <LoadingButton
+            loading={isLoading}
+            type="submit"
+            variant="contained"
+            disableElevation
+          >
             {edit ? "Save changes" : "Create"}
           </LoadingButton>
         </div>

@@ -1,11 +1,11 @@
 import { GenericErrorResponse } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { Alert, AlertTitle } from "@mui/material";
-import { Set } from "@prisma/client";
+import { Term } from "@prisma/client";
 
-interface SetListProps extends React.HTMLAttributes<HTMLDivElement> {
-  sets?: Set[];
-  render: (set: Set) => React.ReactNode;
+interface TermListProps extends React.HTMLAttributes<HTMLDivElement> {
+  terms?: Term[];
+  render: (term: Term, index: number) => React.ReactNode;
   isLoading?: boolean;
   isError?: boolean;
   error?: GenericErrorResponse;
@@ -13,9 +13,9 @@ interface SetListProps extends React.HTMLAttributes<HTMLDivElement> {
   skeletonCount: number;
 }
 
-export function SetList(props: SetListProps) {
+export function TermList(props: TermListProps) {
   const {
-    sets,
+    terms,
     render,
     error,
     isError,
@@ -34,19 +34,13 @@ export function SetList(props: SetListProps) {
           {error?.message}
         </Alert>
       ) : (
-        <div
-          className={cn(
-            "flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3",
-            className
-          )}
-          {...other}
-        >
+        <div className={cn("flex flex-col gap-3", className)} {...other}>
           {isLoading ? (
             Array(skeletonCount)
               .fill(1)
               .map((_, i) => renderSkeleton(i))
-          ) : sets && sets.length > 0 ? (
-            sets.map(render)
+          ) : terms && terms.length > 0 ? (
+            terms.map(render)
           ) : (
             <p>No folders found</p>
           )}

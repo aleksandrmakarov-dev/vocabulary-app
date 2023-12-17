@@ -2,8 +2,9 @@
 import { SetEditor, useSetById } from "@/components/entities/set";
 import { useUpdateSetById } from "@/components/features/set";
 import { EditSetDto } from "@/lib/dto/setDto";
-import { NewTermEditor } from "../../term";
+import { CurrentTermEditor, NewTermEditor } from "../../term";
 import PageSubheader from "@/components/shared/page-subheader/PageSubheader";
+import { TermCardSkeleton, TermList } from "@/components/entities/term";
 
 interface CurrentSetEditorProps {
   setId: string;
@@ -28,6 +29,9 @@ export function CurrentSetEditor(props: CurrentSetEditorProps) {
         onSuccess: () => {
           console.log("success");
         },
+        onError: () => {
+          console.log("error");
+        },
       }
     );
   };
@@ -43,6 +47,17 @@ export function CurrentSetEditor(props: CurrentSetEditorProps) {
         error={error?.response?.data || dataError?.response?.data}
       />
       <PageSubheader title="Terms" />
+      <TermList
+        terms={data?.terms}
+        render={(term, index) => (
+          <CurrentTermEditor key={term.id} index={index + 1} term={term} />
+        )}
+        isLoading={isDataLoading}
+        isError={isDataError}
+        error={dataError?.response?.data}
+        renderSkeleton={(key) => <TermCardSkeleton key={key} renderTitle />}
+        skeletonCount={3}
+      />
       <NewTermEditor setId={setId} />
     </>
   );
