@@ -44,8 +44,6 @@ export const DELETE = withErrorHandler(
       throw new NotFoundError(`Set with id ${ctx.params.id} not found`);
     }
 
-    await termRepository.deleteBySetId(ctx.params.id);
-
     return NoContent();
   }
 );
