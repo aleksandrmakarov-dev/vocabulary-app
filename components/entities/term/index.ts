@@ -4,5 +4,6 @@ export { TermCardBody } from "./ui/term-card-body/TermCardBody";
 export { TermList } from "./ui/term-list/TermList";
 export { TermCard } from "./ui/term-card/TermCard";
 export { TermCardSkeleton } from "./ui/term-card-skeleton/TermCardSkeleton";
+export { TermFlipCard } from "./ui/term-flip-card/TermFlipCard";
 
 export { termKeys } from "./api/termApi";

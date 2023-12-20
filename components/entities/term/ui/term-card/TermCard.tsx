@@ -1,7 +1,7 @@
 import { Card, CardHeader, Divider, CardContent } from "@mui/material";
 
 interface TermCardProps {
-  title: string | React.ReactNode;
+  title?: string | React.ReactNode;
   action?: React.ReactNode;
   children: React.ReactNode;
 }

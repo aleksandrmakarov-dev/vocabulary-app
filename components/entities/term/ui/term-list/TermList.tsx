@@ -9,6 +9,7 @@ interface TermListProps extends React.HTMLAttributes<HTMLDivElement> {
   isLoading?: boolean;
   isError?: boolean;
   error?: GenericErrorResponse;
+  emptyView?: React.ReactNode;
   renderSkeleton: (key: number | string) => React.ReactNode;
   skeletonCount: number;
 }
@@ -23,6 +24,7 @@ export function TermList(props: TermListProps) {
     className,
     renderSkeleton,
     skeletonCount,
+    emptyView,
     ...other
   } = props;
 
@@ -35,15 +37,13 @@ export function TermList(props: TermListProps) {
         </Alert>
       ) : (
         <div className={cn("flex flex-col gap-3", className)} {...other}>
-          {isLoading ? (
-            Array(skeletonCount)
-              .fill(1)
-              .map((_, i) => renderSkeleton(i))
-          ) : terms && terms.length > 0 ? (
-            terms.map(render)
-          ) : (
-            <p className="text-center">No terms found</p>
-          )}
+          {isLoading
+            ? Array(skeletonCount)
+                .fill(1)
+                .map((_, i) => renderSkeleton(i))
+            : terms && terms.length > 0
+            ? terms.map(render)
+            : emptyView}
         </div>
       )}
     </>

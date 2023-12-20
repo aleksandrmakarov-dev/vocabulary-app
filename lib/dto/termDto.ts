@@ -8,3 +8,8 @@ export const EditTermDtoSchema = z.object({
 });
 
 export type EditTermDto = z.infer<typeof EditTermDtoSchema>;
+
+export type EditTermWithVoiceDto = EditTermDto & {
+  textVoice: string;
+  definitionVoice: string;
+};

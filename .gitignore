@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# google cloud credentials
+vocabulary-app-408522-9fc35af17c48.json

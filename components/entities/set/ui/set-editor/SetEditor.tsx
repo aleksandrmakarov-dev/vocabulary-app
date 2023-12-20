@@ -27,6 +27,8 @@ export function SetEditor(props: SetEditorProps) {
     defaultValues: {
       name: "",
       description: "",
+      originalLang: "",
+      targetLang: "",
       folderId: folderId,
       image: null,
     },

@@ -115,7 +115,9 @@ export function CurrentTermEditor(props: CurrentTermEditorProps) {
       ) : (
         <TermCardBody
           text={term.text}
+          textVoice={term.textVoice}
           definition={term.definition}
+          definitionVoice={term.definitionVoice}
           image={term.image}
         />
       )}

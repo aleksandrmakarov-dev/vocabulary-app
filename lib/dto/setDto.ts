@@ -26,6 +26,8 @@ export const EditSetDtoSchema = z.object({
   name: z.string().min(1).max(255),
   description: z.string().min(1).max(255),
   image: z.string().nullable(),
+  originalLang: z.string().min(1).max(255),
+  targetLang: z.string().min(1).max(255),
   folderId: z.string().min(1).max(255),
 });
 

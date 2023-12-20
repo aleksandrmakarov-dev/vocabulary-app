@@ -34,13 +34,15 @@ async function getListByFolderId(
 }
 
 async function create(body: EditSetDto): Promise<Set | null> {
-  const { name, description, image, folderId } = body;
+  const { name, description, image, originalLang, targetLang, folderId } = body;
 
   const createdSet = await prisma.set.create({
     data: {
       name: name,
       description: description,
       image: image,
+      originalLang: originalLang,
+      targetLang: targetLang,
       folderId: folderId,
     },
   });
@@ -72,14 +74,18 @@ async function getById(id: string): Promise<SetWithTerms | null> {
 }
 
 async function updateById(id: string, data: EditSetDto): Promise<Set | null> {
+  const { name, description, image, originalLang, targetLang, folderId } = data;
+
   const updatedSet = await prisma.set.update({
     where: {
       id: id,
     },
     data: {
-      name: data.name,
-      description: data.description,
-      image: data.image,
+      name: name,
+      description: description,
+      image: image,
+      originalLang: originalLang,
+      targetLang: targetLang,
       updatedAt: new Date(),
     },
   });

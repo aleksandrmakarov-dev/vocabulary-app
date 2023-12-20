@@ -1,6 +1,5 @@
-"use client";
-import { useSetById } from "@/components/entities/set";
-import PageHeader from "@/components/shared/page-header/PageHeader";
+import { CurrentSetDetails } from "@/components/widgets/set";
+import { MainTermList } from "@/components/widgets/term";
 
 interface SetPageContext {
   params: {
@@ -9,16 +8,5 @@ interface SetPageContext {
 }
 
 export default function SetPage(ctx: SetPageContext) {
-  const {
-    data: set,
-    isLoading: isSetLoading,
-    isError: isSetError,
-    error: setError,
-  } = useSetById(ctx.params.id);
-
-  return (
-    <>
-      <PageHeader title={set?.name} isLoading={isSetLoading} />
-    </>
-  );
+  return <CurrentSetDetails id={ctx.params.id} />;
 }

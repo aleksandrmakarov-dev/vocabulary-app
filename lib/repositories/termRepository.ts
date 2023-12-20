@@ -1,9 +1,9 @@
 import { Term } from "@prisma/client";
-import { EditTermDto } from "../dto/termDto";
+import { EditTermDto, EditTermWithVoiceDto } from "../dto/termDto";
 import prisma from "@/lib/prisma";
 
-async function create(data: EditTermDto): Promise<Term | null> {
-  const { setId, text, definition, image } = data;
+async function create(data: EditTermWithVoiceDto): Promise<Term | null> {
+  const { setId, text, definition, image, definitionVoice, textVoice } = data;
 
   const createdTerm = await prisma.term.create({
     data: {
@@ -11,6 +11,8 @@ async function create(data: EditTermDto): Promise<Term | null> {
       definition: definition,
       image: image,
       setId: setId,
+      textVoice: textVoice,
+      definitionVoice: definitionVoice,
     },
   });
 
@@ -37,8 +39,11 @@ async function getById(id: string): Promise<Term | null> {
   });
 }
 
-async function updateById(id: string, data: EditTermDto): Promise<Term | null> {
-  const { text, definition, image, setId } = data;
+async function updateById(
+  id: string,
+  data: EditTermWithVoiceDto
+): Promise<Term | null> {
+  const { text, definition, image, setId, textVoice, definitionVoice } = data;
 
   return await prisma.term.update({
     where: {
@@ -49,6 +54,8 @@ async function updateById(id: string, data: EditTermDto): Promise<Term | null> {
       definition: definition,
       image: image,
       setId: setId,
+      textVoice: textVoice,
+      definitionVoice: definitionVoice,
       updatedAt: new Date(),
     },
   });
