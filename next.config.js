@@ -8,6 +8,9 @@ const nextConfig = {
       {
         hostname: "cdn.pixabay.com",
       },
+      {
+        hostname: "storage.googleapis.com",
+      },
     ],
   },
 };

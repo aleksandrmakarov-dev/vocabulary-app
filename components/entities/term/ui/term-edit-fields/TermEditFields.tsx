@@ -3,6 +3,7 @@ import { EditTermDto } from "@/lib/dto/termDto";
 import { TextField } from "@mui/material";
 import { Control } from "react-hook-form";
 import ImageIcon from "@mui/icons-material/Image";
+import { ImageUpload } from "@/components/shared/image-upload/ImageUpload";
 
 interface TermEditFieldsProps {
   control: Control<EditTermDto>;
@@ -37,10 +38,11 @@ export function TermEditFields(props: TermEditFieldsProps) {
         name="image"
         disabled={isLoading}
         render={({ field }) => (
-          <div className="border-2 rounded-md border-gray-200 h-full p-3 flex flex-col items-center justify-center border-dashed">
-            <ImageIcon />
-            <span className="text-sm text-gray-900">Image</span>
-          </div>
+          <ImageUpload
+            className="h-24"
+            value={field.value}
+            onChange={field.onChange}
+          />
         )}
       />
     </>

@@ -74,7 +74,7 @@ async function getById(id: string): Promise<SetWithTerms | null> {
 }
 
 async function updateById(id: string, data: EditSetDto): Promise<Set | null> {
-  const { name, description, image, originalLang, targetLang, folderId } = data;
+  const { name, description, image, originalLang, targetLang } = data;
 
   const updatedSet = await prisma.set.update({
     where: {

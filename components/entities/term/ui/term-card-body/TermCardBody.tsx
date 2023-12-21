@@ -26,8 +26,13 @@ export function TermCardBody(props: TermCardBodyProps) {
       {image && (
         <>
           <div className="bg-gray-200 h-full" />
-          <div className="relative h-44 w-full">
-            <Image src={image} alt="image" fill />
+          <div className="relative h-24 w-full">
+            <Image
+              className="object-cover object-center"
+              src={image}
+              alt="image"
+              fill
+            />
           </div>
         </>
       )}
